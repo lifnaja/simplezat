@@ -72,6 +72,30 @@ jobs:
             pipenv install 
             pipenv run ansible-playbook -i server_hosts playbooks/dev.yml --extra-vars "project_root=~/simplezat"
 
+  deploy_production:
+    working_directory: ~/simplezat
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - attach_workspace:
+          at: .
+      - setup_remote_docker
+      - run:
+          name: Build Live Images
+          command: |
+            docker build -t lifzzz/simplezat:stable -f Dockerfile.production .
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push lifzzz/simplezat:live
+      - add_ssh_keys
+      - run:
+          name: Deploy App
+          command: |
+            cd deployment
+            ssh-keyscan -H 35.247.154.179  >> ~/.ssh/known_hosts
+            pipenv install 
+            pipenv run ansible-playbook -i server_hosts playbooks/prod.yml --extra-vars "project_root=~/simplezat"
+    
+
 workflows:
   version: 2
   simplezat_pipeline:
@@ -89,3 +113,10 @@ workflows:
       - deploy_dev:
           requires:
             - unit_tests
+     - wait_for_approve:
+          type: approval
+          requires:
+            - deploy_dev
+     - deploy_production:
+          requires:
+            - wait_for_approve
