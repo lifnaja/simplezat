@@ -6,47 +6,62 @@ jobs:
       - image: circleci/python:3.7.1
     steps:
       - checkout
+      - persist_to_workspace:
+          root: .
+          paths: .
 
   python_dependencies:
     working_directory: ~/simplezat
     docker:
       - image: circleci/python:3.7.1
     steps:
+      - attach_workspaces:
+        at: .
       - run:
           name: Install Dependencies
           command: |
-            pwd
-            ls
+            pip3 install pipenv
+            pipenv install --dev
+
   static_analysis:
     working_directory: ~/simplezat
     docker:
       - image: circleci/python:3.7.1
     steps:
+      - attach_workspaces:
+          at: .
       - run:
-          name: Install Dependencies
+          name: Run Static Analysis
           command: |
-            pwd
-            ls
+            pipenv run flake8
+
   unit_tests:
     working_directory: ~/simplezat
     docker:
       - image: circleci/python:3.7.1
     steps:
+      - attach_workspaces:
+          at: .
       - run:
-          name: Install Dependencies
+          name: Run Unit Tests
           command: |
-            pwd
-            ls
+            cd simplezat
+            pipenv run python manage.py test
+
   deploy_dev:
     working_directory: ~/simplezat
     docker:
       - image: circleci/python:3.7.1
     steps:
+      - attach_workspaces:
+          at: .
       - run:
-          name: Install Dependencies
+          name: Deploy App
           command: |
-            pwd
-            ls
+            cd deployment
+            pipenv install 
+            pipenv run ansible-playbook -i server_hosts playbooks/dev.yml --extra-vars "project_root=~/simplezat"
+
 workflows:
   version: 2
   simplezat_pipeline:
