@@ -1,0 +1,6 @@
+- name: prod
+  hosts: prod
+  roles:
+    - prod
+  vars:
+    - server_env: prod

@@ -1,13 +1,8 @@
-version: "3.7"
+version: "3.3"
 
 services:
   app:
     image: lifzzz/simplezat:live
-    build:
-      context: .
-      dockerfile: Dockerfile.production
-    volumes:
-      - .:/app
     ports:
       - 8000:8000
     command: ./entrypoint.production.sh

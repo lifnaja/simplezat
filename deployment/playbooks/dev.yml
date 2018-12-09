@@ -1,0 +1,6 @@
+- name: dev
+  hosts: dev
+  roles:
+    - deploy
+  vars:
+    - server_env: dev
