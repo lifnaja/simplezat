@@ -20,37 +20,36 @@ jobs:
 
   static_analysis:
     working_directory: ~/simplezat
-      docker:
-        - image: circleci/python:3.7.1
-      steps:
-        - run:
-            name: Install Dependencies
-            command: |
-              pwd
-              ls
+    docker:
+      - image: circleci/python:3.7.1
+    steps:
+      - run:
+          name: Install Dependencies
+          command: |
+            pwd
+            ls
 
   unit_tests:
     working_directory: ~/simplezat
-      docker:
-        - image: circleci/python:3.7.1
-      steps:
-        - run:
-            name: Install Dependencies
-            command: |
-              pwd
-              ls
+    docker:
+      - image: circleci/python:3.7.1
+    steps:
+      - run:
+          name: Install Dependencies
+          command: |
+            pwd
+            ls
 
   deploy_dev:
     working_directory: ~/simplezat
-      docker:
-        - image: circleci/python:3.7.1
-      steps:
-        - run:
-            name: Install Dependencies
-            command: |
-              pwd
-              ls
-
+    docker:
+      - image: circleci/python:3.7.1
+    steps:
+      - run:
+          name: Install Dependencies
+          command: |
+            pwd
+            ls
 
 workflows:
   version: 2
@@ -69,5 +68,3 @@ workflows:
       - deploy_dev:
           requires:
             - unit_tests
-
-
