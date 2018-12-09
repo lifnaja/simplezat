@@ -63,7 +63,7 @@ jobs:
             docker build -t lifzzz/simplezat:stable -f Dockerfile.dev .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push lifzzz/simplezat:stable
-      - add_ssh_keys:
+      - add_ssh_keys
       - run:
           name: Deploy App
           command: |
