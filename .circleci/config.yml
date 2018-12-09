@@ -94,7 +94,6 @@ jobs:
             ssh-keyscan -H 35.247.154.179  >> ~/.ssh/known_hosts
             pipenv install 
             pipenv run ansible-playbook -i server_hosts playbooks/prod.yml --extra-vars "project_root=~/simplezat"
-    
 
 workflows:
   version: 2
@@ -117,6 +116,6 @@ workflows:
           type: approval
           requires:
             - deploy_dev
-     - deploy_production:
+      - deploy_production:
           requires:
             - wait_for_approve
