@@ -15,12 +15,11 @@ jobs:
     docker:
       - image: circleci/python:3.7.1
     steps:
-      - attach_workspaces:
+      - attach_workspace:
           at: .
       - run:
           name: Install Dependencies
           command: |
-            pip3 install pipenv
             pipenv install --dev
 
   static_analysis:
@@ -33,6 +32,7 @@ jobs:
       - run:
           name: Run Static Analysis
           command: |
+            pipenv install --dev
             pipenv run flake8
 
   unit_tests:
@@ -45,6 +45,7 @@ jobs:
       - run:
           name: Run Unit Tests
           command: |
+            pip install --dev
             cd simplezat
             pipenv run python manage.py test
 
