@@ -54,7 +54,7 @@ jobs:
     docker:
       - image: circleci/python:3.6
     steps:
-      - attach_workspaces:
+      - attach_workspace:
           at: .
       - run:
           name: Build Stable Images
