@@ -61,7 +61,7 @@ workflows:
             - checkout_code
       - static_analysis:
           requires:
-            - pythin_dependencies
+            - python_dependencies
       - unit_tests:
           require:
             - python_dependencies
