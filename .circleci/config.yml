@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Run Unit Tests
           command: |
-            pip install --dev
+            pipenv install --dev
             cd simplezat
             pipenv run python manage.py test
 
