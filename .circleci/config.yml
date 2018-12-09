@@ -1,0 +1,73 @@
+version: 2
+jobs:
+  checkout_code:
+    working_directory: ~/simplezat
+    docker:
+      - image: circleci/python:3.7.1
+    steps:
+      - checkout
+
+  python_dependencies:
+    working_directory: ~/simplezat
+    docker:
+      - image: circleci/python:3.7.1
+    steps:
+      - run:
+          name: Install Dependencies
+          command: |
+            pwd
+            ls
+
+  static_analysis:
+    working_directory: ~/simplezat
+      docker:
+        - image: circleci/python:3.7.1
+      steps:
+        - run:
+            name: Install Dependencies
+            command: |
+              pwd
+              ls
+
+  unit_tests:
+    working_directory: ~/simplezat
+      docker:
+        - image: circleci/python:3.7.1
+      steps:
+        - run:
+            name: Install Dependencies
+            command: |
+              pwd
+              ls
+
+  deploy_dev:
+    working_directory: ~/simplezat
+      docker:
+        - image: circleci/python:3.7.1
+      steps:
+        - run:
+            name: Install Dependencies
+            command: |
+              pwd
+              ls
+
+
+workflows:
+  version: 2
+  simplezat_pipeline:
+    jobs:
+      - checkout_code
+      - python_dependencies:
+          requires:
+            - checkout_code
+      - static_analysis:
+          requires:
+            - pythin_dependencies
+      - unit_tests:
+          require:
+            - python_dependencies
+      - deploy_dev:
+          requires:
+            - unit_tests
+
+
