@@ -1,6 +1,6 @@
 - name: prod
   hosts: prod
   roles:
-    - prod
+    - deploy
   vars:
     - server_env: prod
