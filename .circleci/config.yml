@@ -3,7 +3,7 @@ jobs:
   checkout_code:
     working_directory: ~/simplezat
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     steps:
       - checkout
       - persist_to_workspace:
@@ -13,7 +13,7 @@ jobs:
   python_dependencies:
     working_directory: ~/simplezat
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     steps:
       - attach_workspace:
           at: .
@@ -25,7 +25,7 @@ jobs:
   static_analysis:
     working_directory: ~/simplezat
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     steps:
       - attach_workspace:
           at: .
@@ -38,7 +38,7 @@ jobs:
   unit_tests:
     working_directory: ~/simplezat
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     steps:
       - attach_workspace:
           at: .
@@ -52,7 +52,7 @@ jobs:
   deploy_dev:
     working_directory: ~/simplezat
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     steps:
       - attach_workspace:
           at: .
