@@ -57,6 +57,15 @@ jobs:
       - attach_workspaces:
           at: .
       - run:
+          name: Build Stable Images
+          command: |
+            docker build -t lifzzz/simplezat:stable -f Dockerfile.dev .
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push lifzzz/simplezat:stable
+      - add_ssh_keys:
+        fingerprints:
+          - ""
+      - run:
           name: Deploy App
           command: |
             cd deployment
