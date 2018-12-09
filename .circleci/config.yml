@@ -17,7 +17,6 @@ jobs:
           command: |
             pwd
             ls
-
   static_analysis:
     working_directory: ~/simplezat
     docker:
@@ -28,7 +27,6 @@ jobs:
           command: |
             pwd
             ls
-
   unit_tests:
     working_directory: ~/simplezat
     docker:
@@ -39,7 +37,6 @@ jobs:
           command: |
             pwd
             ls
-
   deploy_dev:
     working_directory: ~/simplezat
     docker:
@@ -50,7 +47,6 @@ jobs:
           command: |
             pwd
             ls
-
 workflows:
   version: 2
   simplezat_pipeline:
@@ -63,7 +59,7 @@ workflows:
           requires:
             - python_dependencies
       - unit_tests:
-          require:
+          requires:
             - python_dependencies
       - deploy_dev:
           requires:
