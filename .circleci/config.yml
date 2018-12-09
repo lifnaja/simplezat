@@ -64,12 +64,11 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push lifzzz/simplezat:stable
       - add_ssh_keys:
-          fingerprints:
-            - "05:c2:e8:5c:96:1c:a8:7e:a6:8c:d6:9a:73:44:e0:87"
       - run:
           name: Deploy App
           command: |
             cd deployment
+            ssh-keyscan -H 35.247.154.179  >> ~/.ssh/known_hosts
             pipenv install 
             pipenv run ansible-playbook -i server_hosts playbooks/dev.yml --extra-vars "project_root=~/simplezat"
 
