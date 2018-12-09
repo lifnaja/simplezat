@@ -63,8 +63,8 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push lifzzz/simplezat:stable
       - add_ssh_keys:
-        fingerprints:
-          - ""
+          fingerprints:
+            - ""
       - run:
           name: Deploy App
           command: |
