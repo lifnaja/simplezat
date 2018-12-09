@@ -83,7 +83,7 @@ jobs:
       - run:
           name: Build Live Images
           command: |
-            docker build -t lifzzz/simplezat:stable -f Dockerfile.production .
+            docker build -t lifzzz/simplezat:live -f Dockerfile.production .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push lifzzz/simplezat:live
       - add_ssh_keys
