@@ -1,0 +1,7 @@
+{% load static %}
+
+<h1>How do we do?</h1>
+
+<a href="{% url 'comment' 'positive' %}"><img src="{% static "images/positive.png" %}" alt ="Positive"></a>
+<a href="{% url 'comment' 'neutral' %}"><img src="{% static "images/neutral.png" %}" alt ="Nuetral"></a>
+<a href="{% url 'comment' 'negative' %}"><img src="{% static "images/negative.png" %}" alt ="Negative"></a>
