@@ -47,7 +47,7 @@ jobs:
           command: |
             pipenv install --dev
             cd simplezat
-            pipenv run python manage.py test
+            pipenv run pytest
 
   deploy_dev:
     working_directory: ~/simplezat
