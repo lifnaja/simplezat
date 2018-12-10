@@ -1,6 +1,11 @@
 version: "3.3"
 
 services:
+  db:
+    image: postgres:11.1-alpine
+    volumes:
+      - postgres-data:/var/lib/postgressql/data
+
   app:
     image: lifzzz/simplezat:unstable
     build:
@@ -11,3 +16,6 @@ services:
     ports:
       - 8000:8000
     command: ./entrypoint.sh
+
+volumes:
+  postgres-data:
