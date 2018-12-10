@@ -1,0 +1,2 @@
+- name: create super user
+  command: docker-compose exec app sh -c "cd simplezat && echo \"from django.contrib.auth.models import User; User.objects.create_superuser('{{ username }}', 'admin@admin.com', '{{ password }}')\" | pipenv run python manage.py shell --settings=simplezat.settings.{{ host }}"
