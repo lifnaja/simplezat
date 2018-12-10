@@ -80,11 +80,12 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - name: Run Acceptance Tests
-      - command: |
-          cd tests
-          npm install cypress
-          CYPRESS_baseUrl=http:// ./node_modules/.bin/cypress run --spec 'cypress/integration/simplezat/*'
+      - run:
+          - name: Run Acceptance Tests
+          - command: |
+              cd tests
+              npm install cypress
+              CYPRESS_baseUrl=http:// ./node_modules/.bin/cypress run --spec 'cypress/integration/simplezat/*'
 
   deploy_production:
     working_directory: ~/simplezat
