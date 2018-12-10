@@ -4,7 +4,7 @@ context('Rating', () => {
     })
 
     it('should be able to give positive rating with comment', () => {
-        cy.contains('How do we do?')
+        cy.get('h1').should('contain', 'How do we do?')
         cy.get('[href="/ratings/positive/"] > img').should('have.attr', 'alt', 'Positive')
         cy.get('[href="/ratings/neutral/"] > img').should('have.attr', 'alt', 'Nuetral')
         cy.get('[href="/ratings/negative/"] > img').should('have.attr', 'alt', 'Negative')
@@ -12,11 +12,22 @@ context('Rating', () => {
         cy.get('img[alt="Positive"]').click()
         cy.wait(1000)
 
-        cy.contains('Any comment?')
+        cy.get('h1').should('contain', 'Any comment?')
         cy.get('textarea[name="comment"]').type('You are doing great!')
         cy.get('[type="submit"]').click()
         cy.wait(1000)
 
-        cy.contains('Thank you!')
+        cy.get('h1').should('contain', 'Thank you!')
+    })
+
+    it('should show error message when give rating without comment', () => {
+        cy.get('img[alt="Positive"]').click()
+        cy.wait(1000)
+
+        cy.get('[type="submit"]').click()
+        cy.wait(1000)
+
+        cy.get('body').should('not.contain', 'Thank you!')
+        cy.get('ul.errorlist').should('contain', 'Please write some comment..')
     })
 })
