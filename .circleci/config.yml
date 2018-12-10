@@ -134,7 +134,7 @@ workflows:
       - wait_for_approve:
           type: approval
           requires:
-            - deploy_dev
+            - acceptance_tests
       - deploy_production:
           requires:
             - wait_for_approve
