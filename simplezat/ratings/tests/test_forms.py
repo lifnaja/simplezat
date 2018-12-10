@@ -4,6 +4,7 @@ from django.test import TestCase
 from ..forms import RatingForm
 from ..models import Rating
 
+
 class RatingFormTest(TestCase):
     def setUp(self):
         self.form = RatingForm()
