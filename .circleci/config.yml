@@ -64,6 +64,7 @@ jobs:
             docker build -t lifzzz/simplezat:stable -f Dockerfile.dev .
             docker tag lifzzz/simplezat:stable lifzzz/simplezat:$CIRCLE_SHA1
             docker push lifzzz/simplezat:stable
+            docker push zkan/simplezat:$CIRCLE_SHA1
       - add_ssh_keys
       - run:
           name: Deploy App
@@ -88,6 +89,7 @@ jobs:
             docker build -t lifzzz/simplezat:live -f Dockerfile.production .
             docker tag lifzzz/simplezat:live lifzzz/simplezat:$CIRCLE_SHA1
             docker push lifzzz/simplezat:live
+            docker push zkan/simplezat:$CIRCLE_SHA1
       - add_ssh_keys
       - run:
           name: Deploy App
