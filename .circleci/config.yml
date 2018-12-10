@@ -65,7 +65,7 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASS
 
             docker build -t lifzzz/simplezat-nginx:stable -f nginx/Dockerfile nginx/
-            docker tag lifzzz/simplezat-nginx:stable lifzzz/simplezat:$CIRCLE_SHA1
+            docker tag lifzzz/simplezat-nginx:stable lifzzz/simplezat-nginx:$CIRCLE_SHA1
             docker push lifzzz/simplezat-nginx:stable
             docker push lifzzz/simplezat-nginx:$CIRCLE_SHA1
 
