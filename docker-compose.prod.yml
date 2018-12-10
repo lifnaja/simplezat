@@ -4,9 +4,11 @@ services:
   nginx:
     image:lifzzz/simplezat-nginx:live
     ports:
-      - "8000:80"
+      - "5000:80"
     volumes:
       - app-staticfiles:/app/static
+    depends_on:
+      - app
 
   db:
     image: postgres:11.1-alpine
@@ -18,6 +20,8 @@ services:
     volumes:
       - app-staticfiles:/app/static
     command: ./entrypoint.production.sh
+    depends_on:
+      - db
 
 volumes:
   postgres-data:
