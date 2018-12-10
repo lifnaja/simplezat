@@ -9,4 +9,3 @@ class RatingAdmin(admin.ModelAdmin):
         'sentiment',
         'comment',
     )
-
