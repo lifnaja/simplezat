@@ -2,9 +2,9 @@ version: "3.3"
 
 services:
   nginx:
-    image:lifzzz/simplezat-nginx:stable
+    image: lifzzz/simplezat-nginx:stable
     ports:
-      - "5000:80"
+      - "80:80"
     volumes:
       - app-staticfiles:/app/static
     depends_on:
