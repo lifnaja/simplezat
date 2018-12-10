@@ -34,6 +34,14 @@ class RatingViewTest(TestCase):
 
 
 class CommentViewTest(TestCase):
+    def setUp(self):
+        self.url = reverse(
+            'comment',
+            kwargs={
+                'rating': 'positive'
+            }
+        )
+
     def test_comment_view_should_render_text_and_comment_form_correctly(self):
         for each in ['positive', 'abc']:
             url = reverse(
@@ -65,35 +73,24 @@ class CommentViewTest(TestCase):
             'comment': 'You did great!'
         }
 
-        url = reverse(
-            'comment',
-            kwargs={
-                'rating': 'positive'
-            }
-        )
-        response = self.client.post(url, data=data)
-        
+        response = self.client.post(self.url, data=data)
+
         self.assertRedirects(response, reverse('thanks'))
 
         rating = Rating.objects.last()
         self.assertEqual(rating.sentiment, 'positive')
         self.assertEqual(rating.comment, 'You did great!')
-       
 
-    def test_submit_comment_invalid_form_should_not_save_data_and_not_redirect(self):
+    def test_submit_comment_invalid_form_should_not_save_data_and_not_redirect(
+        self
+    ):
         data = {
             'sentiment': 'positive',
             'comment': ''
         }
 
-        url = reverse(
-            'comment',
-            kwargs={
-                'rating': 'positive'
-            }
-        )
-        response = self.client.post(url, data=data)
-        
+        response = self.client.post(self.url, data=data)
+
         self.assertEqual(response.status_code, 200)
 
         rating = Rating.objects.last()

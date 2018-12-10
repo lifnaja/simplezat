@@ -45,7 +45,7 @@ class CommentView(View):
             self.template,
             {
                 'rating': rating,
-                'form':form
+                'form': form
             }
         )
 
