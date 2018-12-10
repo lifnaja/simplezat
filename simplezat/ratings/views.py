@@ -2,6 +2,8 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from .forms import RatingForm
+
 
 class RatingView(View):
     template = 'ratings.html'
@@ -17,11 +19,17 @@ class CommentView(View):
     template = 'comments.html'
 
     def get(self, request, rating):
+        initial = {
+            'sentiment': rating
+        }
+        form = RatingForm(initial=initial)
+
         return render(
             request,
             self.template,
             {
-                'rating': rating
+                'rating': rating,
+                'form': form,
             }
         )
 

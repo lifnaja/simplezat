@@ -24,10 +24,9 @@ context('Rating', () => {
         cy.get('img[alt="Positive"]').click()
         cy.wait(1000)
 
+        cy.get('textarea[name="comment"]').should('have.attr', 'required')
         cy.get('[type="submit"]').click()
-        cy.wait(1000)
 
         cy.get('body').should('not.contain', 'Thank you!')
-        cy.get('ul.errorlist').should('contain', 'Please write some comment..')
     })
 })
