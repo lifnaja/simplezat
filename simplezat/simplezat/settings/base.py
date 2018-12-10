@@ -76,8 +76,13 @@ WSGI_APPLICATION = 'simplezat.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DATABASE_NAME', 'postgres'),
+        'USER': os.environ.get('DATABASE_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
+        'HOST': os.environ.get('DATABASE_HOST','db'),
+        'PORT': os.environ.get('DATABASE_PORT','5432'),
+
     }
 }
 
