@@ -60,8 +60,9 @@ jobs:
       - run:
           name: Build Stable Images
           command: |
-            docker build -t lifzzz/simplezat:stable -f Dockerfile.dev .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker build -t lifzzz/simplezat:stable -f Dockerfile.dev .
+            docker tag lifzzz/simplezat:stable lifzzz/simplezat:$CIRCLE_SHA1
             docker push lifzzz/simplezat:stable
       - add_ssh_keys
       - run:
@@ -83,8 +84,9 @@ jobs:
       - run:
           name: Build Live Images
           command: |
-            docker build -t lifzzz/simplezat:live -f Dockerfile.production .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker build -t lifzzz/simplezat:live -f Dockerfile.production .
+            docker tag lifzzz/simplezat:live lifzzz/simplezat:$CIRCLE_SHA1
             docker push lifzzz/simplezat:live
       - add_ssh_keys
       - run:
