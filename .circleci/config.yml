@@ -73,6 +73,18 @@ jobs:
             ssh-keyscan -H 35.247.154.179  >> ~/.ssh/known_hosts
             pipenv install 
             pipenv run ansible-playbook -i server_hosts playbooks/dev.yml --extra-vars "project_root=~/simplezat"
+  acceptance_tests:
+    working_directory: ~/simplezat
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - attach_workspace:
+          at: .
+      - name: Run Acceptance Tests
+      - command: |
+          cd tests
+          npm install cypress
+          CYPRESS_baseUrl=http:// ./node_modules/.bin/cypress run --spec 'cypress/integration/simplezat/*'
 
   deploy_production:
     working_directory: ~/simplezat
@@ -116,6 +128,9 @@ workflows:
       - deploy_dev:
           requires:
             - unit_tests
+      - acceptance_tests:
+          requires:
+            - deploy_dev
       - wait_for_approve:
           type: approval
           requires:

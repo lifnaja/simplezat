@@ -1,9 +1,9 @@
 context('Rating', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:8000/ratings')
+        cy.visit('/ratings/')
     })
 
-    it('should be able to give positive rating with comment',() => {
+    it('should be able to give positive rating with comment', () => {
         cy.contains('How do we do?')
         cy.get('[href="/ratings/positive/"] > img').should('have.attr', 'alt', 'Positive')
         cy.get('[href="/ratings/neutral/"] > img').should('have.attr', 'alt', 'Nuetral')
@@ -18,5 +18,5 @@ context('Rating', () => {
         cy.wait(1000)
 
         cy.contains('Thank you!')
-    })  
+    })
 })
