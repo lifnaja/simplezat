@@ -1,6 +1,13 @@
 version: "3.3"
 
 services:
+  nginx:
+    image:lifzzz/simplezat-nginx:stable
+    ports:
+      - "8000:80"
+    volumes:
+      - app-staticfiles:/app/static
+
   db:
     image: postgres:11.1-alpine
     volumes:
@@ -8,8 +15,8 @@ services:
 
   app:
     image: lifzzz/simplezat:stable
-    ports:
-      - 8000:8000
+    volumes:
+      - app-staticfiles:/app/static
     command: ./entrypoint.dev.sh
 
 volumes:
